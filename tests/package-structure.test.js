@@ -4,7 +4,7 @@ import { test } from "node:test";
 
 const PLUGIN = "system-prompt-curator";
 const PACKAGE = `@agent-sh/${PLUGIN}`;
-const VERSION = "2.0.0";
+const VERSION = "2.0.1";
 const REPO = `https://github.com/agent-sh/${PLUGIN}`;
 
 const requiredPackageFiles = [
@@ -101,6 +101,7 @@ test("skill frontmatter and body preserve autonomous-agent prompt quality", () =
   assert.ok(fm.description.length <= 512);
   assert.match(fm.description, /system prompts/);
   assert.match(fm.description, /Not for user-facing messages/);
+  assert.equal(fm["disable-model-invocation"], "true");
   assert.match(fm["argument-hint"], /--for-orchestrator/);
 
   assert.ok(lineCount <= 400, `skill is too large (${lineCount} lines)`);

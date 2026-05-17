@@ -1,6 +1,6 @@
 {
   "name": "system-prompt-curator",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Curate production-grade system prompts for autonomous coding agents and multi-agent orchestration",
   "author": {
     "name": "Avi Fenesh",

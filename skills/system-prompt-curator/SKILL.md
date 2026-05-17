@@ -1,7 +1,8 @@
 ---
 name: system-prompt-curator
 description: "Use when user asks to create, improve, or debug production-grade system prompts for autonomous coding agents and multi-agent orchestration. Not for user-facing messages or chat prompts."
-version: 2.0.0
+version: 2.0.1
+disable-model-invocation: true
 argument-hint: "[role-description] [--improve path/to/prompt] [--for-orchestrator] [--minimal]"
 ---
 
