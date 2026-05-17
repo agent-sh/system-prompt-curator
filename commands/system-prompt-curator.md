@@ -19,3 +19,23 @@ When the user asks you to create or improve a prompt:
    - Recommended harness-level reinforcements
 
 Output the final prompt in a clean code block, followed by the analysis.
+
+## Verification
+
+Before finalizing, verify the rewritten prompt against the 10 core principles, confirm it has explicit completion criteria, and note any harness-level checks that should enforce behavior outside the prompt.
+
+## Example
+
+Input:
+`/system-prompt-curator "GitHub issue resolver"`
+
+Output:
+```markdown
+<final prompt here>
+```
+
+Then report the token estimate, orchestrator suitability, and harness-level recommendations.
+
+## Output Format
+
+Return the final prompt in a clean code block, followed by the issue summary, token estimate, orchestrator suitability, and harness-level recommendations.

@@ -1,6 +1,6 @@
 ---
 name: system-prompt-curator
-description: "Curate production-grade system prompts for autonomous coding agents and multi-agent orchestration. Use when creating, improving, or debugging agent prompts. Not for user-facing messages or chat prompts."
+description: "Use when user asks to create, improve, or debug production-grade system prompts for autonomous coding agents and multi-agent orchestration. Not for user-facing messages or chat prompts."
 version: 2.0.0
 argument-hint: "[role-description] [--improve path/to/prompt] [--for-orchestrator] [--minimal]"
 ---

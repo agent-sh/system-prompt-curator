@@ -24,7 +24,7 @@ test("skill and command expose the curator workflow", () => {
   const command = readFileSync("commands/system-prompt-curator.md", "utf8");
 
   assert.match(skill, /^name: system-prompt-curator$/m);
-  assert.match(skill, /Use when creating, improving, or debugging agent prompts/);
+  assert.match(skill, /Use when user asks to create, improve, or debug production-grade system prompts/);
   assert.match(skill, /\$ARGUMENTS/);
   assert.match(skill, /Explore -> Plan -> Implement -> Verify -> Deliver/);
   assert.match(command, /skills\/system-prompt-curator\/SKILL\.md/);
