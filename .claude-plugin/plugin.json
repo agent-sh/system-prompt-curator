@@ -1,0 +1,20 @@
+{
+  "name": "system-prompt-curator",
+  "version": "2.0.0",
+  "description": "Curate production-grade system prompts for autonomous coding agents and multi-agent orchestration",
+  "author": {
+    "name": "Avi Fenesh",
+    "url": "https://github.com/avifenesh"
+  },
+  "homepage": "https://github.com/agent-sh/system-prompt-curator",
+  "repository": "https://github.com/agent-sh/system-prompt-curator",
+  "license": "MIT",
+  "keywords": [
+    "system-prompts",
+    "agent-prompts",
+    "prompt-engineering",
+    "codex",
+    "claude-code",
+    "opencode"
+  ]
+}

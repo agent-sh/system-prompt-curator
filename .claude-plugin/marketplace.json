@@ -1,0 +1,25 @@
+{
+  "name": "system-prompt-curator",
+  "description": "Canonical guidance for creating and refining production-grade autonomous agent system prompts",
+  "version": "2.0.0",
+  "owner": {
+    "name": "Avi Fenesh",
+    "url": "https://github.com/avifenesh"
+  },
+  "repository": "https://github.com/agent-sh/system-prompt-curator",
+  "keywords": [
+    "system-prompt-curator",
+    "agent-prompts",
+    "orchestration",
+    "prompt-engineering"
+  ],
+  "plugins": [
+    {
+      "name": "system-prompt-curator",
+      "source": ".",
+      "description": "Create and improve autonomous coding-agent prompts with phase structure, evidence gates, and error recovery",
+      "version": "2.0.0",
+      "category": "development"
+    }
+  ]
+}

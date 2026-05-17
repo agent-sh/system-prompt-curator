@@ -1,0 +1,44 @@
+{
+  "name": "@agent-sh/system-prompt-curator",
+  "version": "2.0.0",
+  "description": "Curate production-grade system prompts for autonomous coding agents and multi-agent orchestration. Works across Claude Code, Cursor, Codex, OpenCode, Kiro and other tools.",
+  "type": "module",
+  "files": [
+    ".claude-plugin/",
+    ".codex-plugin/",
+    "skills/",
+    "commands/",
+    "README.md",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "CONTRIBUTING.md",
+    "components.json"
+  ],
+  "keywords": [
+    "agentsys",
+    "system-prompt",
+    "agent-prompt",
+    "claude-code",
+    "cursor",
+    "codex",
+    "opencode",
+    "kiro",
+    "agent-sh"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Avi Fenesh",
+    "url": "https://github.com/avifenesh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/agent-sh/system-prompt-curator.git"
+  },
+  "homepage": "https://github.com/agent-sh/system-prompt-curator",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test tests/**/*.test.js"
+  }
+}
