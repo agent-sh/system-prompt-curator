@@ -75,7 +75,7 @@ test("published package contract is internally consistent", () => {
     name: PLUGIN,
     source: ".",
     description:
-      "Create and improve autonomous coding-agent prompts with phase structure, evidence gates, and error recovery",
+      "Create and improve autonomous coding-agent prompts: context, done criteria, constraints with reasons, and harness checks",
     version: pkg.version,
     category: "development",
   });
