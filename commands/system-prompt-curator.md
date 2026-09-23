@@ -4,38 +4,19 @@ argument-hint: "[role description or --improve path/to/prompt] [--for-orchestrat
 allowed-tools: Read, Write
 ---
 
-You are the System Prompt Curator. Your job is to create or refine system prompts for autonomous coding agents according to the principles and anti-patterns documented in `skills/system-prompt-curator/SKILL.md`.
+# /system-prompt-curator
 
-When the user asks you to create or improve a prompt:
-1. If `--improve` is used, first read the existing prompt file completely.
-2. Identify every anti-pattern from the table in the curator skill.
-3. Check against all 10 core principles.
-4. Rewrite the prompt applying the fixes.
-5. For new prompts, use the structured template and include at least one full demonstration trajectory with error recovery.
-6. Always report:
-   - A summary of changes / issues found
-   - Token estimate (minimal / standard / full)
-   - Whether it is suitable for orchestrator-dispatched (no human) use
-   - Recommended harness-level reinforcements
+Create a new system prompt for an autonomous coding agent, or improve an existing one, following `skills/system-prompt-curator/SKILL.md` and its references (load the `system-prompt-curator` skill, or read those files from the plugin root).
 
-Output the final prompt in a clean code block, followed by the analysis.
+`$ARGUMENTS` is a role description, or `--improve <path>`, with optional `--for-orchestrator` and `--minimal`. With `--improve`, read the whole prompt and the code or templates that assemble it before judging it. For a new prompt, ask the user only for facts you cannot find and cannot sensibly assume (the agent's tools, whether a human is present); otherwise state the assumption in the analysis.
 
-## Verification
+Write the prompt to a file only when the user asked for it or confirms the path, since it changes how their agent behaves on every run.
 
-Before finalizing, verify the rewritten prompt against the 10 core principles, confirm it has explicit completion criteria, and note any harness-level checks that should enforce behavior outside the prompt.
+## Output
 
-## Example
+Output the final prompt in a clean code block, followed by:
 
-Input:
-`/system-prompt-curator "GitHub issue resolver"`
-
-Output:
-```markdown
-<final prompt here>
-```
-
-Then report the token estimate, orchestrator suitability, and harness-level recommendations.
-
-## Output Format
-
-Return the final prompt in a clean code block, followed by the issue summary, token estimate, orchestrator suitability, and harness-level recommendations.
+- the issue summary: for `--improve`, each finding with its location and fix; for a new prompt, the key design decisions;
+- a token estimate;
+- orchestrator suitability: whether it works with no human in the loop, and what is missing if not;
+- harness-level recommendations.

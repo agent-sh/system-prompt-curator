@@ -7,9 +7,8 @@ This plugin is the canonical reference for writing high-quality agent identities
 ## What it does
 
 - Generates new system prompts from role descriptions
-- Dramatically improves existing prompts by detecting research-backed anti-patterns
-- Provides specialized templates for common agent roles (GitHub issue → PR, research, review, orchestration)
-- Enforces the 10 core principles proven across top-performing agents (SWE-agent, OpenHands, Claude Code, Cursor, etc.)
+- Improves existing prompts by finding text written for weaker models (emphasis stacks, reasoning incantations, step scripts, long examples) and replacing it with context, done criteria and reasoned constraints
+- Provides role skeletons for common agents (coding, orchestrator-dispatched, reviewer, research, subagent)
 - Recommends harness-level reinforcements that belong in code rather than the prompt
 
 ## Installation
@@ -34,17 +33,16 @@ agentsys install system-prompt-curator
 
 ## Related Plugins
 
-- `skill-curator` — sibling plugin for writing excellent `SKILL.md` files
-- `enhance` — broader prompt/plugin/agent improvement
-- `karpathy-guidelines` — foundational behavioral rules often included in prompts
+- `skill-curator`: sibling plugin for writing `SKILL.md` files
+- `enhance`: broader prompt, plugin and agent improvement
 
 ## Philosophy
 
-The best agents are not the ones with the cleverest tricks in the prompt — they are the ones with:
-- Clear identity
-- Enforced phased workflow
-- Concrete completion criteria that require evidence
-- Proper error recovery guidance
-- Tools declared upfront
+Current models plan, reason and verify on their own, and follow instructions closely. The best agent prompts give them what they cannot know:
+- Who they work for and in what environment
+- The goal and what done looks like, with evidence
+- Constraints with reasons
+- A way to stop honestly when blocked
+- Harness checks for what code can enforce
 
 This curator exists to make those patterns easy to apply consistently.

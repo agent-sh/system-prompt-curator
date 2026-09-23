@@ -8,14 +8,13 @@ This repository ships one command and one skill for creating or improving autono
 
 ## Core Responsibility
 
-Maintain and evolve the 10 Core Principles and Anti-Pattern table so that every agent prompt generated or improved through this tool follows the highest standards proven across SWE-agent, OpenHands, Claude Code, Cursor, and similar systems.
+Keep the guidance current with how strong models read prompts: context the model lacks, goal and done criteria, constraints with reasons, no emphasis stacks, reasoning incantations or step scripts for judgment work. The skill body is the core; `references/` holds the audit table, role skeletons and harness recommendations.
 
 ## When Editing
 
-- Reflect changes to the principles or anti-pattern table in `skills/system-prompt-curator/SKILL.md`.
-- New specialized templates should include realistic error recovery examples.
+- Reflect guidance changes in `skills/system-prompt-curator/SKILL.md` and its references, and check claims about model behavior against current vendor docs before changing them.
+- Role skeletons stay skeletons: real facts to fill in, not long example trajectories.
 - Keep the skill balanced between depth and usability (the `--minimal` flag exists for a reason).
-- The skill is intentionally opinionated — these patterns are backed by extensive empirical testing across many agent implementations.
 
 ## Cross-Tool Goal
 
