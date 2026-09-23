@@ -4,7 +4,7 @@ import { test } from "node:test";
 
 const PLUGIN = "system-prompt-curator";
 const PACKAGE = `@agent-sh/${PLUGIN}`;
-const VERSION = "2.0.1";
+const VERSION = "2.1.0";
 const REPO = `https://github.com/agent-sh/${PLUGIN}`;
 
 const requiredPackageFiles = [
@@ -98,23 +98,31 @@ test("skill frontmatter and body preserve autonomous-agent prompt quality", () =
   assert.equal(fm.name, PLUGIN);
   assert.equal(fm.version, VERSION);
   assert.ok(fm.description.startsWith("Use when "));
-  assert.ok(fm.description.length <= 512);
-  assert.match(fm.description, /system prompts/);
-  assert.match(fm.description, /Not for user-facing messages/);
+  assert.ok(fm.description.length <= 1024, "spec caps descriptions at 1024 characters");
+  assert.ok(fm.description.split(/\s+/).length <= 40, "trigger descriptions stay short");
+  assert.match(fm.description, /system prompt/);
+  assert.match(fm.description, /Not for chat replies or user-facing copy/);
   assert.equal(fm["disable-model-invocation"], "true");
   assert.match(fm["argument-hint"], /--for-orchestrator/);
 
   assert.ok(lineCount <= 400, `skill is too large (${lineCount} lines)`);
-  assert.match(skill, /## Core Principles/);
-  assert.match(skill, /## Anti-Patterns to Detect and Fix/);
-  assert.match(skill, /Explore -> Plan -> Implement -> Verify -> Deliver/);
-  assert.match(skill, /Validate complete_run/);
-  assert.match(skill, /error recovery/);
-  const template = skill.split("## Prompt Template")[1].split("## Workflow")[0];
-  assert.doesNotMatch(template, /CRITICAL WARNING|FAILURE TO/i);
+  assert.match(skill, /## Output/);
+  assert.match(skill, /## Done/);
+  assert.match(skill, /done criteria/i);
+
+  // The guidance itself must not teach dated prompting.
+  assert.doesNotMatch(skill, /CRITICAL WARNING|FAILURE TO/i);
+  assert.doesNotMatch(skill, /^\s*(?:[-*]\s*)?(?:\*\*)?(MUST|NEVER|ALWAYS)\b/m, "no all-caps rules in the guidance body");
+  assert.doesNotMatch(skill, /Every section is mandatory|full trajectory|mandatory think/i);
+
+  for (const ref of ["references/audit.md", "references/anatomy.md", "references/harness.md"]) {
+    assert.match(skill, new RegExp(ref.replace(".", "\\.")), `SKILL.md should point at ${ref}`);
+    assert.ok(existsSync(`skills/system-prompt-curator/${ref}`), `missing ${ref}`);
+  }
+  assert.match(read("skills/system-prompt-curator/references/harness.md"), /Check completion/);
 });
 
-test("slash command delegates to the skill and requires verification", () => {
+test("slash command delegates to the skill and keeps the output contract", () => {
   const command = read("commands/system-prompt-curator.md");
   const fm = parseFrontmatter(command);
 
@@ -122,9 +130,9 @@ test("slash command delegates to the skill and requires verification", () => {
   assert.match(fm["allowed-tools"], /Read/);
   assert.match(fm["allowed-tools"], /Write/);
   assert.match(command, /skills\/system-prompt-curator\/SKILL\.md/);
-  assert.match(command, /10 core principles/);
-  assert.match(command, /full demonstration trajectory with error recovery/);
-  assert.match(command, /explicit completion criteria/);
+  assert.match(command, /clean code block/);
+  assert.match(command, /token estimate/);
+  assert.match(command, /orchestrator suitability/i);
   assert.match(command, /harness-level recommendations/);
 });
 
@@ -136,7 +144,7 @@ test("docs and CI encode the agent-sh publishing standard", () => {
   assert.match(readme, /agentsys install system-prompt-curator/);
   assert.match(readme, /skill-curator/);
   assert.match(agents, /skills\/system-prompt-curator\/SKILL\.md/);
-  assert.match(agents, /10 Core Principles/);
+  assert.match(agents, /references/);
 
   assert.match(ci, /node-version: \$\{\{ matrix\.node-version \}\}/);
   assert.match(ci, /node-version:\s*\[18, 20, 22\]/);

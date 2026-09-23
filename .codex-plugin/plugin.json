@@ -5,7 +5,7 @@
   "interface": {
     "displayName": "System Prompt Curator",
     "shortDescription": "Design and improve autonomous agent prompts",
-    "longDescription": "System Prompt Curator helps agents create and refine system prompts with task-matched identity, phased workflows, explicit tools, evidence-based completion criteria, and realistic error-recovery examples.",
+    "longDescription": "System Prompt Curator helps agents create and refine system prompts with environment context, goals and evidence-based done criteria, constraints with reasons, and harness checks, and removes prompting patterns written for weaker models.",
     "developerName": "Avi Fenesh",
     "category": "developer-tools",
     "capabilities": [
