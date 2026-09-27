@@ -14,7 +14,6 @@ const requiredPackageFiles = [
   "commands/",
   "README.md",
   "AGENTS.md",
-  "CLAUDE.md",
   "CONTRIBUTING.md",
   "components.json",
 ];
