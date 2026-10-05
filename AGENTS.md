@@ -1,43 +1,20 @@
-# AGENTS.md — system-prompt-curator
+# system-prompt-curator
 
-This plugin is the authoritative source for system prompt patterns in the agent-sh ecosystem.
+## Project overview
 
-## Overview
+One command and one skill for creating or improving the system prompts of autonomous coding agents; the agent-sh ecosystem's source for system prompt patterns. It is documentation only, with no runtime library.
 
-This repository ships one command and one skill for creating or improving autonomous agent system prompts. It is documentation-heavy and has no runtime library.
+The product is `skills/system-prompt-curator/SKILL.md` and its references: `skills/system-prompt-curator/references/audit.md` (dated patterns and their replacements), `skills/system-prompt-curator/references/anatomy.md` (role skeletons) and `skills/system-prompt-curator/references/harness.md` (what to enforce in code). `commands/system-prompt-curator.md` delegates to the skill. Changes to the skill body reach every prompt the curator writes, so make them surgical and explain each one.
 
-## Core Responsibility
+## Editing the guidance
 
-Keep the guidance current with how strong models read prompts: context the model lacks, goal and done criteria, constraints with reasons, no emphasis stacks, reasoning incantations or step scripts for judgment work. The skill body is the core; `references/` holds the audit table, role skeletons and harness recommendations.
+- The guidance tracks how current models read prompts: context the model lacks, a goal with done criteria, constraints with reasons, and no emphasis stacks, reasoning incantations or step scripts for judgment work.
+- Change a claim about model behavior only with current evidence (vendor prompting docs or a measured eval), and name it in the PR.
+- Role skeletons list the facts to fill in. Long demonstration trajectories get copied by the model, so they stay out.
+- Harness recommendations stay separate from the prompt template: they belong in the harness reference, outside the prompt, unless the user asks for a pure-prompt solution.
+- Keep the skill usable at both depths; `--minimal` exists for users who want the smallest prompt.
+- Prompts the curator writes should work in Claude Code, Codex, Cursor, OpenCode, Kiro and other agent platforms without major changes.
 
-## When Editing
+## Checks
 
-- Reflect guidance changes in `skills/system-prompt-curator/SKILL.md` and its references, and check claims about model behavior against current vendor docs before changing them.
-- Role skeletons stay skeletons: real facts to fill in, not long example trajectories.
-- Keep the skill balanced between depth and usability (the `--minimal` flag exists for a reason).
-
-## Cross-Tool Goal
-
-Prompts produced by this curator should work well in Claude Code, Cursor, Codex, OpenCode, Kiro, and other agent platforms without major modification.
-
-## Additional maintainer guidance
-
-Follow the Karpathy Guidelines strictly when working in this repository.
-
-This skill encodes hard-won patterns for agent system prompts. Change the guidance when current model behavior or vendor documentation supports it, and say what the evidence is.
-
-## Key Rules
-
-- The skill body is the heart of the product. Changes here have wide impact.
-- Keep role skeletons short; long demonstration trajectories get copied by the model.
-- When improving prompts, be surgical — explain every change.
-- The harness-level recommendations section is deliberately separate from the prompt template. Keep those items outside the prompt itself unless the user specifically asks for a pure-prompt solution.
-
-## Validation scope
-
-Choose checks that cover the changed behavior. For CPU-only tooling, documentation
-and configuration changes, run the relevant CPU tests, static checks and configuration
-validation. Do not require a blanket GPU gate for those changes. Require GPU
-qualification when GPU, runtime or model behavior, or related claims, change.
-Preserve applicable native, model and hardware qualification gates. CPU checks do
-not qualify GPU behavior.
+`npm test` checks the package contract and the skill's own rules (no all-caps rules, a Done section, the references exist). CI also runs `npm pack --dry-run` and agnix.
