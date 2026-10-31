@@ -34,7 +34,7 @@ agentsys install system-prompt-curator
 ## Related Plugins
 
 - `skill-curator`: sibling plugin for writing `SKILL.md` files
-- `enhance`: broader prompt, plugin and agent improvement
+- `agnix`: lints agent configuration files (SKILL.md, CLAUDE.md, AGENTS.md, hooks, MCP)
 
 ## Philosophy
 
